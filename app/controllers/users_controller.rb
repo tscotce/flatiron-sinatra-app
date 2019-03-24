@@ -1,4 +1,17 @@
 class UsersController < ApplicationController
+  get '/login' do
+    if logged_in?
+      redirect to "events/index"
+    else erb :"users/login"
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(username: params["username"])
+    session[:id] = @user.id
+    redirect to "events/show"
+  end
+  
   get '/signup' do
     if logged_in?
       redirect to "events/index"
