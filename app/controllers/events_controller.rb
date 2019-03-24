@@ -48,5 +48,16 @@ class EventsController < ApplicationController
     end
   end
 
+  patch '/events/:id/edit' do
+    if params[:name].present? && params[:description].present? && params[:website].present?
+      @event.name = params[:name]
+      @event.description = params[:description]
+      @event.website = params[:website]
+      @event.save
+      erb :"/events/index"
+    else erb :"/events/edit"
+    end
+  end
+
 
 end
