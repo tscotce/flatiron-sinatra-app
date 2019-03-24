@@ -32,5 +32,13 @@ class EventsController < ApplicationController
     end
   end
 
+  delete '/events/:id/delete' do
+    if logged_in?
+      @event = Event.find_by(params [:name])
+      @event.delete
+      erb :"/events/index"
+    else redirect to :"/login"
+  end
+
 
 end
