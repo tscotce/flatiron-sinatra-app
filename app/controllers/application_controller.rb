@@ -20,6 +20,12 @@ get '/login' do
   end
 end
 
+post '/login' do
+  @user = User.find_by(username: params["username"])
+  session[:id] = @user.id
+  redirect to "events/show"
+end
+
 
 helpers do
 		def logged_in?
