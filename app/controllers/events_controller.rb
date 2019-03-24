@@ -38,6 +38,7 @@ class EventsController < ApplicationController
       @event.delete
       erb :"/events/index"
     else redirect to :"/login"
+    end
   end
 
   get '/events/:id/edit' do
