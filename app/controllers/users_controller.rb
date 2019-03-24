@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     session[:id] = @user.id
     redirect to "events/show"
   end
-  
+
   get '/signup' do
     if logged_in?
       redirect to "events/index"
@@ -28,5 +28,11 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/logout' do
+    if logged_in?
+      redirect to "users/logout"
+    else erb :"users/login"
+    end
+  end
 
 end
