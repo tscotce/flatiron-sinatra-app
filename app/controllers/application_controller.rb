@@ -13,6 +13,13 @@ get '/' do
   erb :index
 end
 
+get '/login' do
+  if logged_in?
+    redirect to "events/index"
+  else erb: "users/login"
+  end
+end
+
 helpers do
 		def logged_in?
 			!!session[:id]
