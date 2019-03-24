@@ -13,5 +13,22 @@ class EventsController < ApplicationController
     end
   end
 
+  post '/events/new' do
+    if params[:name].present? && params[:description].present? && params[:website].present?
+      @user = current_user
+      @event = Event.create(name: params[:name], description: params[:description], website: params[:website])
+      @event.user_id = @user.id
+      @event.save
+      erb :"/events/index"
+    else redirect to :"/events/new"
+    end
+  end
+
+  get '/events/:id' do
+    if logged_in?
+      erb :"events/:id"
+    end
+  end
+
 
 end
