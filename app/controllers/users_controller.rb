@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if logged_in?
       session.clear
       redirect to "/"
-    else erb :"users/login"
+    else erb :"/login"
     end
   end
 
