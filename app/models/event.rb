@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
   end
 
   def print_types
-    AmnhEventsCliApp::Events.make_types.each.with_index(1) do |event, i|
+    Event.make_types.each.with_index(1) do |event, i|
       puts "#{i}. #{event.type}"
     end
   end
@@ -49,7 +49,7 @@ class Event < ActiveRecord::Base
   end
 
   def list_events(type)
-    @events = AmnhEventsCliApp::Events.sort_events.select {|event| event.type == type}
+    @events = Event.sort_events.select {|event| event.type == type}
     @events.uniq {|event| event.name}
   end
 
@@ -57,7 +57,7 @@ class Event < ActiveRecord::Base
     input = nil
     while input != "exit"
       input = gets.strip.downcase
-      if input.to_i.between?(1, AmnhEventsCliApp::Events.make_types.length)
+      if input.to_i.between?(1, Event.make_types.length)
         type = @event_types[input.to_i - 1].type
         list_events(type).each do |event|
           puts "#{event.date} - #{event.name}:"
