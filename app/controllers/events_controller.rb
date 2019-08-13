@@ -59,6 +59,4 @@ class EventsController < ApplicationController
     else erb :"/events/edit"
     end
   end
-
-
 end
