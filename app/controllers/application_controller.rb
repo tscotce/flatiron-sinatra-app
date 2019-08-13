@@ -22,6 +22,9 @@ helpers do
 		def current_user
 			@current_user ||= User.find(session[:id])
 		end
-	end
 
+    def logout!
+      session.clear
+    end
+	end
 end
