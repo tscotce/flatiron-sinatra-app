@@ -1,16 +1,21 @@
-<h2>Your Event:
+<h2>Your Event:</h2>
   <div class="container">
     <p><%= @event.name %><br>
       <%= @event.description %><br>
       <%= @event.website %><br>
     </p>
   </div>
-</h2>
 
-<p><a href="events/edit">Edit Event</a>
-  <form action="/events/<%=@event.id %>/delete" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Event">
-  </form>
-</p>
+
+<p><a href="events/edit">Edit Event</a></p>
+<form action="/events/<%=@event.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="edit">
+  <input type="submit" value="Edit Event">
+</form>
+
+<form action="/events/<%=@event.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Event">
+</form>
+
 <p><a href="/logout">Log Out</a></p>

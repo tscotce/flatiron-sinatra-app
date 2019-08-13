@@ -1,4 +1,4 @@
-require './config/environment'
+# require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
@@ -16,11 +16,11 @@ end
 
 helpers do
 		def logged_in?
-			!!session[:id]
+			!!current_user
 		end
 
 		def current_user
-			User.find(session[:id])
+			@current_user ||= User.find(session[:id])
 		end
 	end
 

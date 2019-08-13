@@ -1,3 +1,4 @@
+require_relative './config/environment'
 require './config/environment'
 
 # if ActiveRecord::Migration.needs_migration?
