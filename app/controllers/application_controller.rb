@@ -1,5 +1,3 @@
-# require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
 set :views, Proc.new { File.join(root, "../views/")}
@@ -28,11 +26,15 @@ helpers do
     end
 
     def get_page
-      @@doc ||= scrape
+      @event = Event.new
+      @doc ||= scrape
     end
 
     def scrape
-      Nokogiri::HTML(open("https://www.amnh.org/calendar?facetsearch=1"))
+      require 'rubygems'
+      require 'nokogiri'
+      require 'open-uri'
+      page = Nokogiri::HTML(open("https://www.amnh.org/calendar?facetsearch=1"))
     end
 
     def get_events
@@ -40,8 +42,10 @@ helpers do
     end
 
     def make_events
+      # binding.pry
+      Event.connection
       get_events.each do |post|
-        @event = Event.new
+        # @event = Event.new
         @event.type = post.css("p.category").text
         @event.name = post.css("a").text.strip
         @event.date = post.css("p.date").text

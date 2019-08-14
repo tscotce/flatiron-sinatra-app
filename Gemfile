@@ -12,3 +12,4 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'nokogiri'
+# require 'open-uri' #open-uri is part of Ruby standard library, that's why only need to require, not installß
