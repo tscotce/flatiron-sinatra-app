@@ -1,38 +1,33 @@
 class Event < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessor :name, :description, :website, :type, :date, 
+  attr_accessor :event, :name, :description, :website, :type, :date
 
-  @@all = []
-
-  def self.all
-    @@all
-  end
-
-  def self.get_events
+  def get_events
     Scraper.get_page.css(".mod.event")
   end
 
-  def self.make_events
-    self.get_events.each do |post|
-      event = Event.new
-      @@all << event
-      event.type = post.css("p.category").text
-      event.name = post.css("a").text.strip
-      event.date = post.css("p.date").text
+  def make_events
+    get_events.each do |post|
+      @event = Event.new
+      # @@all << event
+      @event.type = post.css("p.category").text
+      @event.name = post.css("a").text.strip
+      @event.date = post.css("p.date").text
       text = post.css("p").text
-      event.description = text.to_s.gsub(/#{event.date}/,"").gsub(/#{event.type}/,"").gsub(" Members Only","").gsub(" Sold Out","").gsub(" Free With Museum Admission","").gsub("â"," ")
-      event.website = post.css("a").first["href"]
+      @event.description = text.to_s.gsub(/#{event.date}/,"").gsub(/#{event.type}/,"").gsub(" Members Only","").gsub(" Sold Out","").gsub(" Free With Museum Admission","").gsub("â"," ")
+      @event.website = post.css("a").first["href"]
+      @event.save
     end
     self.all
   end
 
-  def self.sort_events
+  def sort_events
     self.make_events
     self.all.sort_by! {|event| event.type}
   end
 
-  def self.make_types
+  def make_types
     self.sort_events.uniq {|event| event.type}
   end
 
@@ -44,7 +39,7 @@ class Event < ActiveRecord::Base
 
   def list_types
     # puts "Here are types of upcoming events at the American Museum of Natural History (AMNH):"
-    @event_types = print_types
+    @event_types = self.print_types
     # puts "Enter the number corresponding to the type of event you'd like more information on or type 'exit':"
   end
 
