@@ -42,7 +42,6 @@ helpers do
     def make_events
       get_events.each do |post|
         @event = Event.new
-        # @@all << event
         @event.type = post.css("p.category").text
         @event.name = post.css("a").text.strip
         @event.date = post.css("p.date").text
@@ -54,25 +53,5 @@ helpers do
       Event.all
     end
 
-    # def sort_events
-    #   Event.make_events
-    #   Event.all.sort_by! {|event| event.type}
-    # end
-    #
-    # def make_types
-    #   self.sort_events.uniq {|event| event.type}
-    # end
-    #
-    # def print_types
-    #   Event.make_types.each.with_index(1) do |event, i|
-    #     puts "#{i}. #{event.type}"
-    #   end
-    # end
-    #
-    # def list_types
-    #   # puts "Here are types of upcoming events at the American Museum of Natural History (AMNH):"
-    #   @event_types = self.print_types
-    #   # puts "Enter the number corresponding to the type of event you'd like more information on or type 'exit':"
-    # end
 	end
 end
