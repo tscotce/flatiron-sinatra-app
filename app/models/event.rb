@@ -43,9 +43,9 @@ class Event < ActiveRecord::Base
   end
 
   def list_types
-    puts "Here are types of upcoming events at the American Museum of Natural History (AMNH):"
+    # puts "Here are types of upcoming events at the American Museum of Natural History (AMNH):"
     @event_types = print_types
-    puts "Enter the number corresponding to the type of event you'd like more information on or type 'exit':"
+    # puts "Enter the number corresponding to the type of event you'd like more information on or type 'exit':"
   end
 
   def list_events(type)

@@ -1,10 +1,6 @@
-<h2>Your Events:
+<h2>List of Upcoming Events:
   <div class = "container">
-    <p><% Event.all.each do |i| %>
-      <% i.name %><br>
-      <% i.description %><br>
-      <% i.website %><br>
-      <% end %></p>
+      <p><%= Event.list_types %></p>
   </div>
 </h2>
 
