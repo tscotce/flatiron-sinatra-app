@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessor :event, :name, :type, :date, :description, :url_text, :url, :time, :location, :tickets, :detailed_description
+  attr_accessor :name, :description, :website, :type, :date, 
 
   @@all = []
 
