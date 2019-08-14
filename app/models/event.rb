@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessor :event, :name, :type, :date, :short_description, :url_text, :url, :time, :location, :tickets, :detailed_description
+  attr_accessor :event, :name, :type, :date, :description, :url_text, :url, :time, :location, :tickets, :detailed_description
 
   @@all = []
 
@@ -21,8 +21,8 @@ class Event < ActiveRecord::Base
       event.name = post.css("a").text.strip
       event.date = post.css("p.date").text
       text = post.css("p").text
-      event.short_description = text.to_s.gsub(/#{event.date}/,"").gsub(/#{event.type}/,"").gsub(" Members Only","").gsub(" Sold Out","").gsub(" Free With Museum Admission","").gsub("â"," ")
-      event.url = post.css("a").first["href"]
+      event.description = text.to_s.gsub(/#{event.date}/,"").gsub(/#{event.type}/,"").gsub(" Members Only","").gsub(" Sold Out","").gsub(" Free With Museum Admission","").gsub("â"," ")
+      event.website = post.css("a").first["href"]
     end
     self.all
   end
@@ -61,7 +61,7 @@ class Event < ActiveRecord::Base
         type = @event_types[input.to_i - 1].type
         list_events(type).each do |event|
           puts "#{event.date} - #{event.name}:"
-          puts "#{event.short_description}"
+          puts "#{event.description}"
           puts "For additional information and to purchase tickets, go to https://www.amnh.org/#{event.url}"
           puts
         end
