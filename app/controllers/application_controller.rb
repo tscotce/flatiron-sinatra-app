@@ -31,14 +31,14 @@ helpers do
     end
 
     def scrape
-      require 'rubygems'
-      require 'nokogiri'
-      require 'open-uri'
-      page = Nokogiri::HTML(open("https://www.amnh.org/calendar?facetsearch=1"))
+      # require 'open-uri'
+      html_doc = open("https://www.amnh.org/calendar?facetsearch=1")
+      nokogiri_doc = Nokogiri::HTML(html_doc)
+      # binding.pry
     end
 
     def get_events
-      self.get_page.css(".mod.event")
+      get_page.css(".mod.event")
     end
 
     def make_events
