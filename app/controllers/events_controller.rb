@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   get '/events' do
     if logged_in?
-      make_events
+      # make_events
       erb :"events/index"
     else redirect to :"/login"
     end
